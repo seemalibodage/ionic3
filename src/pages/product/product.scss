@@ -1,0 +1,29 @@
+page-product {
+    .ion-slides-container{
+        ion-slides {
+            .bg-center-cover{
+                height: 65vw;
+            }
+        }
+    }
+    ion-card.card{
+        // padding: 0;
+        // margin: 0px 10px 0px 0px;
+        // width: calc(100% - 0px);
+        
+        .bg-center-cover{
+            height: 35vw;
+        }
+    }
+    ion-footer{
+        text-align: center;
+        ion-buttons{
+            padding: 5px;
+            button.bar-button{
+                margin: 0 10px;
+            }
+        }
+    }
+}
+
+

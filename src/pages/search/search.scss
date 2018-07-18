@@ -1,0 +1,41 @@
+page-search,
+page-order-list{
+    ion-item-sliding ion-item-options{
+        background-color: color($colors, primary);
+    }
+}
+page-search {
+    ion-header{
+        .item-ios.item-block .item-inner {
+            border-bottom: none;
+        }
+        .item-md.item-block .item-inner {
+            border-bottom: none;
+        }
+        .item-md{
+            padding-left: 0;
+        }
+        .item-md.item-input.input-has-focus .item-inner {
+            border-bottom-color: transparent;
+            box-shadow: none;
+        }
+        .item[color="primary"] input::placeholder{
+            color: #fff;
+        }
+
+        .item .text-input-ios {
+            margin-left: 0;
+            margin-right: 8px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            padding: 0;
+            width: calc(100% - 8px);
+        }
+        .item-block{
+            min-height: auto;
+        }
+    }
+    .segment-ios {
+        padding: 10px 40px;
+    }
+}

@@ -1,0 +1,72 @@
+page-product-listing {
+  ion-card.card {
+    position: relative;
+
+    .item + .card-content {
+      padding-top: 12px;
+    }
+    ion-card-content {
+      p {
+        height: 2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      h3 {
+        font-size: 1.2em !important;
+      }
+    }
+    .bg-center-cover {
+      height: 60vw;
+      box-shadow: inset 0px -60px 50px -30px rgba(0, 0, 0, 0.75);
+      position: relative;
+      .update-cart-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 23, 68, 0.4);
+        text-align: center;
+        padding: 20vw 0;
+        button {
+          font-size: 2em;
+          color:color($colors, light);
+          border: none;
+        }
+      }
+    }
+    .ion-card-content-overlay {
+      background: transparent;
+      // padding: 20px;
+      font-size: 2em;
+      color: color($colors, light);
+      position: absolute;
+      width: 100%;
+      bottom: 80px;
+      box-shadow: inset 0px -60px 50px -30px rgba(0, 0, 0, 0.75);
+    }
+  }
+  .product-category-toolbar-filter {
+    ion-slide {
+      width: 25vw;
+      padding: 0 5px;
+    }
+    ion-chip {
+      background: transparent;
+      border: solid 1px color($colors, primary);
+      color: color($colors, primary);
+      width: 100%;
+
+      &.active {
+        background: color($colors, primary);
+        border: solid 1px color($colors, primary);
+        color: color($colors, light);
+      }
+    }
+  }
+}
+page-search,
+page-product-listing {
+  .empty-state > .empty-state-icon {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjAwJyBoZWlnaHQ9JzIwMCcgZmlsbD0iIzUwNTA1YSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGQ9Ik03NS4yNTIsNTYuODk0YzAuMTM5LTAuNzU2LTEuMDYxLTEuNjMyLTEuODU5LTIuMTI1YzAuMDctMC4zNTIsMC4xMDQtMC42OSwwLjEwNC0xLjAyMWMwLTMuMjE0LTIuNjI1LTUuODI3LTUuODUyLTUuODI3ICBjLTEuNjQ2LDAtMy4xNzQsMC42NzgtNC4yNjgsMS44NThjLTAuMTctMC4xNDgtMC4zNDgtMC4yODgtMC41MzMtMC40MTdjMC4wNTktMC4zMjEsMC4wODgtMC42MjcsMC4wODgtMC45MzEgIGMwLTMuMjE0LTIuNjI1LTUuODI3LTUuODUyLTUuODI3Yy0yLjc5MywwLTUuMTIzLDEuOTM1LTUuNzAxLDQuNTY0Yy0yLjQxMS0wLjI1Mi00LjU0OSwxLjAzNS01LjYyNSwzICBjLTEuMDg1LTEuMTA4LTIuNTg5LTEuNzctNC4xNzgtMS43N2MtMi4wNTIsMC0zLjg2NywxLjA4Mi00LjkwOCwyLjcyMWwtNS42NTMtMjkuOTY3bC0yLjY4MiwwLjU3NGw3LjMxOCwzMC40ODYgIGMtMC41MDMtMC4xNDItMS4wMTgtMC4yMzQtMS41NC0wLjIzNGMtMC4wNjgsMC0wLjEzNCwwLjAwOC0wLjIwMiwwLjAxbC03LjMyNS0zMC4wNThsLTIuNjQ4LDAuNzE2bDguNzUsMjkuNTE1ICBjLTIuMjQ4LDAuNTYzLTMuOTc5LDIuNDIxLTQuMzQ3LDQuNzMxaC0xLjM3NWwwLjAzNSwwLjk0OGMwLjI0MSw2LjUzLDMuMTM4LDEyLjc1OCw3Ljk1OCwxNy4xNzV2My44M0g2OC4wN3YtMy44MyAgYzQuODIyLTQuNDE3LDcuNzE5LTEwLjY0NSw3Ljk1OS0xNy4xNzVsMC4wMzUtMC45NDhINzUuMjUyeiBNMzcuNDM0LDU1LjE2NWwwLjE3Mi0xLjQxN2MwLjI0NC0yLjAwNywxLjk1MS0zLjUyLDMuOTcxLTMuNTIgIGMxLjU1OSwwLDIuOTQ4LDAuODc5LDMuNjI0LDIuMjk1bDEuMjM1LDIuNTg0bDAuNDktMi44MmMwLjMzNS0xLjkyMiwxLjk5Ny0zLjMxNSwzLjk1My0zLjMxNWMwLjMxNSwwLDAuNjQ3LDAuMDUsMS4wNDMsMC4xNTYgIGwxLjEwNywwLjI5OGwwLjA0NS0xLjE0NmMwLjA4Mi0yLjE1OCwxLjg0Mi0zLjg0OCw0LjAwNi0zLjg0OGMyLjIxOSwwLDQuMDIzLDEuNzk0LDQuMDIzLDMuOTk5YzAsMC4zMzQtMC4wNTcsMC42ODYtMC4xOCwxLjEwOCAgbC0wLjIwOSwwLjcxNGwwLjY1NiwwLjM0OWMwLjUzNywwLjI4NCwwLjk4OCwwLjY2OCwxLjM0MiwxLjE0bDAuODA1LDEuMDc4bDAuNzA1LTEuMTQ2YzAuNzQyLTEuMjA1LDIuMDIxLTEuOTI1LDMuNDIyLTEuOTI1ICBjMi4yMTksMCw0LjAyMywxLjc5NCw0LjAyMywzLjk5OWMwLDAuMzY1LTAuMDY0LDAuNzQ1LTAuMjA3LDEuMTkybC0wLjI0MiwwLjc3MWwwLjczNCwwLjMzNmMwLjIyOSwwLjEwMywwLjc4NSwwLjUwNywxLjIwNywwLjgzNyAgbC0zNS40MDMsMC4wMDhsLTAuMzI2LTEuNzI5TDM3LjQzNCw1NS4xNjV6IE0zNi4xNzUsNTQuMzk0bDAuNTk5LDIuNDk4bC0xLjY3LDAuMDAxbC0wLjc0OC0zLjA2NiAgQzM0Ljk4OSw1My44NjYsMzUuNjEyLDU0LjA1NywzNi4xNzUsNTQuMzk0eiBNMzMuMjA4LDUzLjkyM2wwLjg4MSwyLjk3bC0zLjg5NSwwLjAwMUMzMC41NDMsNTUuNDE4LDMxLjcyMSw1NC4yNjYsMzMuMjA4LDUzLjkyM3ogICBNNjYuMjQyLDc3LjAxOUgzNi43ODV2LTEuNDMzaDI5LjQ1OFY3Ny4wMTl6IE02Ni43NSw3My43NTdIMzYuMjc3Yy00LjI4Mi0zLjg4MS02LjkzOS05LjI5OS03LjM5Ni0xNS4wMzVoNDUuMjY2ICBDNzMuNjkxLDY0LjQ1OCw3MS4wMzMsNjkuODc2LDY2Ljc1LDczLjc1N3oiLz48L3N2Zz4=");
+  }
+}

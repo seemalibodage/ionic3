@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Your Cart</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!--<pre>{{order | json}}</pre>-->
+    <ion-list [hidden]="!order?.order_details.length">
+        <ion-list-header>
+            Total {{order?.order_details.length}} Item(s) Added
+            <button item-end ion-button icon-left clear color="danger" (tap)="removeAllItems()">
+                <ion-icon name="trash"></ion-icon>Remove all from cart
+            </button>
+        </ion-list-header>
+        <ion-item no-lines *ngFor="let item of order?.order_details">
+            <ion-thumbnail item-start (tap)="goToProductPage(item.product_id)">
+                <img [src]="item?.product_image || noImageURL">
+            </ion-thumbnail>
+            <h2>{{item.product_name}}</h2>
+            <h3>
+                <span [innerHTML]="currencySymbol"> </span>&nbsp;
+                {{item.price}}&nbsp;/&nbsp;{{item.uom}}</h3>
+            <ion-buttons item-end>
+                <button small ion-button icon-only outline round color="primary" (tap)="updateCart(item, item.qty - 1)">
+                    <ion-icon name='remove'></ion-icon>
+                </button>
+                <button ion-button clear color="dark">{{item.qty}}</button>
+                <button small ion-button icon-only  outline round color="primary" (tap)="updateCart(item, item.qty + 1)">
+                    <ion-icon name='add'></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-item>
+        <ion-list-header text-right>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-8>
+                        Sub Total:
+                    </ion-col>
+                    <ion-col col-4>
+                        <span [innerHTML]="currencySymbol"> </span>&nbsp;{{order?.sub_total_price}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-8>
+                        Vat:
+                    </ion-col>
+                    <ion-col col-4>
+                        {{order?.vat}} %
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-8>
+                        Tax:
+                    </ion-col>
+                    <ion-col col-4>
+                        {{order?.tax}} %
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list-header>
+        <ion-list-header text-right>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-8>
+                        Total:
+                    </ion-col>
+                    <ion-col col-4>
+                        <span [innerHTML]="currencySymbol"> </span>&nbsp;{{order?.total_price}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list-header>
+    </ion-list>
+    <div class="empty-state" [hidden]="order?.order_details.length">
+        <ion-icon name="ios-basket-outline"></ion-icon>
+        <h2 class="empty-state-title">Your Cart is empty</h2>
+        <p class="empty-state-content">Look like you havn't made your menu yet.</p>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="primary">
+        <button (tap)="placeOrder()" color="light" [hidden]="!order?.order_details.length" ion-button icon-right clear full>
+            <!--<span [innerHTML]="currencySymbol"> </span>&nbsp;{{order?.total_price}}  -->
+            Place Order <ion-icon name='arrow-round-forward'></ion-icon>
+        </button>
+        <button (tap)="goBackToShopping()" color="light" [hidden]="order?.order_details.length" ion-button icon-left clear full>
+            <ion-icon name='arrow-round-back'></ion-icon> Back to Shopping
+        </button>
+    </ion-toolbar>
+</ion-footer>

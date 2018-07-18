@@ -1,0 +1,114 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            {{product.name}}
+        </ion-title>
+        <ion-buttons [hidden]="viewCtrl.name === 'ProductPage'" start>
+            <button ion-button (tap)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="ion-slides-container">
+        <ion-slides pager>
+            <ion-slide *ngFor="let img of product?.media_list;">
+                <!--<img [src]="img.path || noImageURL" alt="product.name">-->
+                <div class="bg-center-cover" [ngStyle]="{'background-image': 'url(' + (img.path || noImageURL) + ')'}"></div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+    <ion-item no-lines>
+        <ion-avatar item-start>
+            <img [src]="product.store?.imagePath || noImageURL">
+        </ion-avatar> 
+        <span item-end>
+            <ion-chip>
+                <ion-label>{{product?.category?.name}}</ion-label>
+            </ion-chip>
+            <ion-chip color="primary">
+                <ion-icon name='share'></ion-icon>
+                <ion-label>Share</ion-label>
+            </ion-chip>
+        </span>
+        <h2 item-content>
+            {{product?.store.name}}
+        </h2>
+    </ion-item>
+    <h2 ion-item no-lines>
+        <ion-icon name='pricetag' item-start color="primary"></ion-icon>
+        <span [innerHTML]="currencySymbol"> </span>&nbsp; {{product.price}} per {{product?.uom?.name}}
+    </h2>
+    <ion-item text-wrap no-lines>
+        {{product.description}}
+    </ion-item>
+    <ion-list-header>
+        {{similarCatProducts?.data && similarCatProducts?.data.length?'':'No'}} Similar Food like {{product.category.name}}
+        <ion-spinner item-end [hidden]="!similarCatProductsLoader"></ion-spinner>
+    </ion-list-header>
+    <ion-item no-lines [hidden]="similarCatProducts?.data && !similarCatProducts?.data.length">
+        <ion-slides #similarCatProductSlide slidesPerView="2" spaceBetween="0">
+            <ion-slide *ngFor="let product of similarCatProducts?.data; let i = index; trackBy: trackByProductId" (tap)="changeProduct(product)">
+                <ion-card>
+                    <div class="bg-center-cover" [ngStyle]="{'background-image': 'url(' + (product?.media_list[0]?.path || noImageURL) + ')'}"></div>
+                    <ion-item class="ion-card-content-overlay">
+                        <span [innerHTML]="currencySymbol"> </span>&nbsp; {{product.price}}
+                        <!--<button ion-button color="primary" icon-only clear item-end>
+                            <ion-icon name='cart'></ion-icon>
+                        </button>-->
+                    </ion-item>
+                    <ion-card-content text-left>
+                        <h3>{{product.name}}</h3>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-item>
+    <ion-list-header>
+        {{similarStoreProducts?.data && similarStoreProducts?.data.length?'':'No'}} More Food From {{product?.store?.name}}
+        <ion-spinner item-end [hidden]="!similarStoreProductsLoader"></ion-spinner>
+    </ion-list-header>
+    <ion-item no-lines [hidden]="similarStoreProducts?.data && !similarStoreProducts?.data.length">
+        <ion-slides #similarStoreProductSlide slidesPerView="2" spaceBetween="0">
+            <ion-slide *ngFor="let product of similarStoreProducts?.data; let i = index; trackBy: trackByProductId" (tap)="changeProduct(product)">
+                <ion-card>
+                    <div class="bg-center-cover" [ngStyle]="{'background-image': 'url(' + (product?.media_list[0]?.path || noImageURL) + ')'}"></div>
+                    <ion-item class="ion-card-content-overlay">
+                        <span [innerHTML]="currencySymbol"> </span>&nbsp; {{product.price}} 
+                        <!--<button ion-button color="primary" icon-only clear item-end>
+                            <ion-icon name='cart'></ion-icon>
+                        </button>-->
+                    </ion-item>
+                    <ion-card-content text-left>
+                        <h3>{{product.name}}</h3>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-item>
+    
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <button [hidden]="product.addedToCart" color="light" ion-button clear icon-left full (tap)="updateCart()">
+        <ion-icon name='cart'></ion-icon> {{product.addedToCart?'View Cart':'Add To Cart'}}
+    </button>
+    <ion-buttons [hidden]="!product.addedToCart" color="primary">
+        <button small ion-button icon-only clear large color="light" (tap)="updateCart(product.addedToCart - 1)">
+            <ion-icon name='remove'></ion-icon>
+        </button>
+        <button ion-button clear large color="light">{{product.addedToCart}}</button>
+        <button small ion-button large icon-only  clear color="light" (tap)="updateCart(product.addedToCart + 1)">
+            <ion-icon name='add'></ion-icon>
+        </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>
+
+
+
+

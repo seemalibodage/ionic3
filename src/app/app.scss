@@ -1,0 +1,141 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+ion-menu ion-content{
+    // background-image: url(../assets/images/sidemenu-bg2.jpg);
+    background-color: #a62c43 !important;
+    background-image: url(../assets/images/sidemenu-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    ion-list 
+    {
+        .user-view{
+            text-align: center;
+            padding: 30px 30px 0;
+            img{
+                width: 100px;
+                border-radius: 50%;
+            }
+        }
+        .item {
+            background-color: transparent;
+            color: color($colors, light);
+            // font-size: 1.2em;
+            font-weight: 300;
+            &:not([no-lines]) {
+                .item-inner{
+                    border: none !important;    
+                    // border-bottom: 1px solid rgba(222, 222, 222, 0.39) !important; 
+                    
+                    padding-top: 3px;
+                    padding-bottom: 3px;
+                    &::after{
+                        content: "";
+                        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 70%, rgba(255, 255, 255, 0.8));
+                        width: 100%;
+                        position: absolute;
+                        bottom: 0;
+                        height: 1px;
+                    }
+                }
+                &:last-child .item-inner{
+                    border-bottom: 0 !important; 
+                }
+            }
+        }
+        &.list-ios > .item-block:last-child{
+            border-bottom: 0;
+        }
+        .item-md.activated,
+        .item-ios.activated {
+            background-color:  color($colors, primary);
+            transition-duration: 200ms;
+        }
+    }
+}
+
+.ion-button-badge {
+    position: relative;
+    overflow: visible!important;
+    .badge {
+        background-color: color($colors, primary);
+        border: solid 1px color($colors, light);
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+    }
+}
+.fab-ios-primary .badge,
+.fab-md-primary .badge,
+.ion-button-badge.button-ios-primary .badge,
+.ion-button-badge.button-md-primary .badge {
+        color: color($colors, primary);
+        background-color: color($colors, light);
+        border: solid 1px color($colors, primary);
+
+}
+
+
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background:  color($colors, primary);
+}
+
+.bg-center-cover{
+    width:100%;
+    background-size: cover;
+    height: 50vw;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+.menu-content-open ion-pane,
+.menu-content-open ion-content,
+.menu-content-open .toolbar {
+    pointer-events: auto;
+}
+
+.has-refresher > .scroll-content {
+    margin-top: 0px;
+    border-top:none; 
+}
+    .empty-state {
+        padding-top: 15vh;
+        text-align: center;
+        .empty-state-icon {
+            width: 30vw;
+            height: 30vw;
+            margin: auto;
+            background-size: cover;
+        }
+        .empty-state-title{
+            color: color($colors, dark);
+        }
+        .empty-state-content{
+            color: color($colors, grey);
+        }
+    }
+
+ion-header ion-navbar{
+    .bar-buttons[end] {
+        margin-right: 6px;
+    }
+}
+.scroll-content {
+    overflow-y: auto;
+}

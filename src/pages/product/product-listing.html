@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (tap)="showSearchpage()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-fab bottom right >
+    <button ion-fab class="ion-button-badge" color="primary" (tap)="showCartPage()">
+        <ion-badge class="badge" color="danger">{{totalCartProducts}}</ion-badge>
+        <ion-icon name="ios-cart-outline"></ion-icon>
+    </button>
+</ion-fab>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefreshProducts($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-toolbar [hidden]="!productCategories?.length" color="transparent" padding text-center class="product-category-toolbar-filter">
+        <ion-slides slidesPerView="4" >
+            <ion-slide>
+                <ion-chip margin-right [ngClass]="{active: !filter.product_category_id}" (tap)="resetProductsFilter()">
+                    <ion-label> All</ion-label>
+                </ion-chip>
+            </ion-slide>
+            <ion-slide *ngFor="let item of productCategories">
+                <ion-chip margin-right (tap)="filterProducts({productCategory:item})" [ngClass]="{active: filter.product_category_id === item.id}">
+                    <ion-label> {{ item.name }}</ion-label>
+                </ion-chip>
+            </ion-slide>
+        </ion-slides>
+    </ion-toolbar>
+
+    <div class="empty-state" [hidden]="!(products?.data && products?.data?.length === 0)">
+        <div class="empty-state-icon"></div>
+        <h2 class="empty-state-title">No Food Found</h2>
+        <p class="empty-state-content">Try Search again with different criteria</p>
+    </div>
+
+    <ion-card *ngFor="let product of products?.data; let i = index; trackBy: trackByProductId">
+        <ion-item>
+            <ion-avatar item-start>
+                <img [src]="product.store?.imagePath || noImageURL">
+            </ion-avatar>
+            <h2>{{product.store?.name}}</h2>
+            <p>{{product.category?.name}}</p>
+        </ion-item>
+        <div class="bg-center-cover" [ngStyle]="{'background-image': 'url(' + (product?.media_list[0]?.path || noImageURL) + ')'}" (click)="openProductModal(product)">
+            <div class="update-cart-overlay" [hidden]="!product.addedToCart">
+                <ion-buttons [hidden]="!product.addedToCart" item-end>
+                    <button small ion-button icon-only outline round color="primary" (click)="updateCart($event, product, product.addedToCart - 1)">
+                        <ion-icon name='remove'></ion-icon>
+                    </button>
+                    <button ion-button clear color="dark">{{product.addedToCart}}</button>
+                    <button small ion-button icon-only  outline round color="primary" (click)="updateCart($event, product, product.addedToCart + 1)">
+                        <ion-icon name='add'></ion-icon>
+                    </button>
+                </ion-buttons>
+            </div>
+        </div>
+        <ion-item class="ion-card-content-overlay">
+            <span [innerHTML]="currencySymbol"> </span> {{product.price}} 
+            <button ion-button [hidden]="product.addedToCart" [color]="product.addedToCart ? 'primary' : 'light'" large icon-only clear item-end (click)="updateCart($event, product)">
+                <ion-icon name='cart'></ion-icon>
+            </button>
+        </ion-item>
+        <ion-card-content>
+            <h3>{{product.name}}</h3>
+            <p>{{product.description}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
